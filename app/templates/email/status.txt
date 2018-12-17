@@ -1,0 +1,6 @@
+Hello {{requester.username}},
+The status of {{ticket.ticket_title}} ticket has been upgraded to {{ticket.status}}!
+
+Regards,
+
+Phoenix Team.

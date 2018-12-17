@@ -1,0 +1,88 @@
+{% macro displayTickets(tickets_list)%}
+    {% for ticket in tickets_list %}
+    <tr>
+        <th>{{ticket.id}}</th>
+        <td>{{ticket.ticket_title}}</td>
+        <td>{{ticket.ticket.username}}</td>
+        <td>{{ticket.assigned_to}}</td>
+      </tr>
+    {% endfor %}
+{% endmacro %}
+
+{% macro displayAllTickets(tickets)%}
+    {% for ticket in tickets %}
+    <tr>
+        <td><a href="{{url_for('main.ticket', id = ticket.id)}}">{{ticket.id}}</a></td>
+        <td>{{ticket.ticket_title}}</td>
+        <td>{{ticket.severity}}</td>
+        <td>{{ticket.ticket.username}}</td>
+        <td>{{ticket.assigned_to}}</td>
+        <td>{{ticket.status}}</td>
+      </tr>
+    {% endfor %}
+{% endmacro %}
+
+{% macro displayTicketsRequester(tickets_list)%}
+    {% for ticket in tickets_list %}
+    <tr>
+        <th>{{ticket.id}}</th>
+        <td>{{ticket.ticket_title}}</td>
+        <td>{{ticket.assigned_to}}</td>
+      </tr>
+    {% endfor %}
+{% endmacro %}
+
+
+{% macro displayTechTickets(tickets_list)%}
+   {% for ticket in tickets_list %}
+   <tr>
+       <th>{{ticket.id}}</th>
+       <td>{{ticket.ticket_title}}</td>
+       <td>{{ticket.ticket.username}}</td>
+     </tr>
+   {% endfor %}
+{% endmacro %}
+
+
+{% macro displayMyTickets(tickets_list)%}
+   {% for ticket in tickets_list %}
+   <a href="{{url_for('main.ticket', id = ticket.id)}}">
+     <div class="card text-white mb-3">
+         <div class="card-header">{{ticket.id}}</div>
+         <div class="card-body">
+           <h5 class="card-title">{{ticket.ticket_title}}</h5>
+           <p class="card-text"><i class="fas fa-exclamation-circle"></i>
+           <span>{{ticket.severity}}</span> <i class="fas fa-user"></i>
+             <span class="technician">{{ticket.assigned_to}}</span></p>
+           <p>Status: <span class="text-muted">{{ticket.status}}</span></p>
+         </div>
+       </div>
+   </a>
+   {% endfor %}
+{% endmacro %}
+
+
+{% macro displayAssignedTickets(tickets_list)%}
+   {% for ticket in tickets_list %}
+   <a href="{{url_for('main.ticket', id = ticket.id)}}">
+   <div class="card text-white mb-3">
+     <div class="card-header">{{ticket.id}}</div>
+     <div class="card-body">
+       <h5 class="card-title">{{ticket.ticket_title}}</h5>
+       <p>{{ticket.ticket_description}}</p>
+       <p class="card-text"><i class="fas fa-exclamation-circle"></i> <span>{{ticket.severity}}</span> <i class="fas fa-user"></i>
+       <span class="requester">{{ticket.ticket.username}}</span></p>
+       <p>Status: <span class="text-muted">{{ticket.status}}</span></p>
+     </div>
+   </div>
+ </a>
+   {% endfor %}
+{% endmacro %}
+
+{%macro displayMessages(message_list)%}
+    {%for message in message_list%}
+        <h4>{{message.message.username}}</h4>
+        <h3>{{message.message_title}}</h3>
+        <p>{{message.message_body}}</p>
+    {%endfor%}
+{%endmacro%}

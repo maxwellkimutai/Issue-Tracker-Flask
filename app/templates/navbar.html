@@ -1,0 +1,44 @@
+
+  <div class="container flex">
+    <div class="header fixed-top">
+      <nav class="navbar navbar-expand-md">
+        <span>
+          <i class="fab fa-phoenix-framework fa-2x home-icon text-dark"></i>
+        </span>
+        <div class="navbar-brand">Phoenix Issue Tracker</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              {%if current_user.role_id == 1%}
+              <a href="/admin" class="nav-link">Dashboard</a>
+              {%elif current_user.role_id == 2%}
+              <a href="/technician" class="nav-link">Dashboard</a>
+              {%elif current_user.role_id == 3%}
+              <a href="/requester" class="nav-link">Dashboard</a>
+              {%endif%}
+            </li>
+            <li class="nav-item">
+                {% if current_user.role_id == 1%}
+              <a href="{{url_for('main.admin_tickets')}}" class="nav-link">Tickets</a>
+              {% elif current_user.role_id == 2 %}
+              <a href="{{url_for('main.tech_tickets')}}" class="nav-link">Tickets</a>
+              {% elif current_user.role_id == 3 %}
+              <a href="{{url_for('main.req_tickets')}}" class="nav-link">Tickets</a>
+              {%endif%}
+            </li>
+            {%if current_user.role_id == 1%}
+            <li class="nav-item">
+              <a href="{{url_for('main.users')}}" class="nav-link">Users</a>
+            </li>
+            {%endif%}
+            <li class="nav-item">
+              <a href="{{url_for('auth.logout')}}" class="nav-link">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>

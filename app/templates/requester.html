@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import 'macros.html' as macro %}
+<!-- Styles block -->
+{%block styles %}
+{{super()}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/user-styles.css')}}">
+{% endblock %}
+
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container flex">
+      <div class="dashboard">
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Thanks for partnering with Phoenix!</strong>
+        </div>
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Keep checking the tickets to view those lately assigned to you!</strong>
+        </div>
+        <button type="button" id="create-ticket" class="btn btn-success btn-lg my-5" data-toggle="modal" data-target="#ticket-form">Create new ticket</button>
+        <div class="ticket-tables row">
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <span><i class="fas fa-spinner fa-2x open-tickets-icon pull-left"></i> Open Tickets</span>
+              </div>
+            </div>
+            <table class="open-tickets table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody id="open-issues">
+                  {{macro.displayTicketsRequester(open_tickets_list)}}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <span><i class="fas fa-clock fa-2x in-progress-icon pull-left"></i>Tickets in Progress</span>
+              </div>
+            </div>
+            <table class="tickets-in-progress table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody id="in-progress-issues">
+                {{macro.displayTicketsRequester(progress_tickets_list)}}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <span><i class="fas fa-check-circle fa-2x closed-icon pull-left"></i> Closed Tickets</span>
+              </div>
+            </div>
+            <table class="closed-tickets table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody id="closed-issues">
+                {{macro.displayTicketsRequester(closed_tickets_list)}}
+              </tbody>
+            </table>
+          </div>
+      </div>
+    <div class="modal fade" id="ticket-form" tabindex="-1" role="dialog" aria-labelledby="ticket-form-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="text-center modal-title" id="ticket-form-title">Create New Ticket:</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{wtf.quick_form(form)}}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

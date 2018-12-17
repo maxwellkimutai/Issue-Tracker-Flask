@@ -1,0 +1,6 @@
+Hello {{user.username}},
+A new ticket has been assigned to you. Please log in to your account to view it and see how you can solve it.
+
+Kind Regards,
+
+Phoenix Team.
